@@ -15,7 +15,11 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/api',mainRoute);
 
+app.get('/',(req,res)=>{
+    
+    res.send("server is live");
 
+})
 
 app.use(errorMidlleware);
 
