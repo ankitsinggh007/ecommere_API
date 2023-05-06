@@ -1,6 +1,8 @@
 // Warning
 // const { creatInBulk, json, deleteInBulk } = require('./Fakedata');
+const Connect = require('./config/databseConfig');
 
+require('dotenv').config();
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const errorMidlleware=require('./middleware/error');
@@ -16,5 +18,18 @@ app.use('/api',mainRoute);
 
 
 app.use(errorMidlleware);
+
+const connect=async()=>{
+    try {
+        await Connect(process.env.Mongo_URI);
+        app.listen(process.env.PORT,()=>{
+            console.log(`development server started on ${process.env.PORT}`);
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+connect();
 
 module.exports=app;
