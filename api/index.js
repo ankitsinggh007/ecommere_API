@@ -1,7 +1,7 @@
 // Warning
 // const { creatInBulk, json, deleteInBulk } = require('./Fakedata');
 const Connect = require('./config/databseConfig');
-
+const cors=require('cors')
 require('dotenv').config();
 const express=require('express');
 const cookieParser=require('cookie-parser');
@@ -9,6 +9,7 @@ const errorMidlleware=require('./middleware/error');
 const mainRoute=require('./routes');
 
 const app=express();
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));
