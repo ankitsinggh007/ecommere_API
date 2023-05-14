@@ -30,8 +30,10 @@ class userService{
         console.log(isPasswordMatch)
         if(!isPasswordMatch) throw new Error("please provide correct password");
         
-                
-            return response.genToken();
+        const token=response.genToken();
+                const {name,role,_id}=response;
+                const user={name,email:response.email,role,_id};
+            return {token,user}
             
         
         } catch (error) {

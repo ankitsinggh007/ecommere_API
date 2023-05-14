@@ -25,7 +25,7 @@ const Register = async (req, res, next) => {
 };
 const Login = async (req, res, next) => {
   try {
-    const response = await userservice.login(req.body);
+    const {token,user} = await userservice.login(req.body);
 
     const option = {
       expires: new Date(
@@ -33,10 +33,10 @@ const Login = async (req, res, next) => {
       ),
       httpOnly: true,
     };
-    return res.status(200).cookie("token", response, option).json({
+    return res.status(200).cookie("token", token, option).json({
       success: true,
       message: "user is succesfully login",
-      response: response,
+      response: user,
       error: {},
     });
   } catch (error) {
