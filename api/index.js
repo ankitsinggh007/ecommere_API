@@ -9,11 +9,21 @@ const errorMidlleware=require('./middleware/error');
 const mainRoute=require('./routes');
 
 const app=express();
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-  }));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+  });
   
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    next();
+  });
+  
+  app.use((req, res, next) => {
+    res.header('Set-Cookie', 'mycookie=value; SameSite=None; Secure');
+    next();
+  });
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));
