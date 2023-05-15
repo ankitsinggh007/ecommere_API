@@ -19,10 +19,7 @@ app.use((req, res, next) => {
     next();
   });
   
-  app.use((req, res, next) => {
-    res.header('Set-Cookie', 'mycookie=value; SameSite=None; Secure');
-    next();
-  });
+  
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
