@@ -10,8 +10,14 @@ const mainRoute=require('./routes');
 
 const app=express();
 app.use((req, res, next) => {
-    // Set the Access-Control-Expose-Headers header to expose the Authorization header
-    res.setHeader('Access-Control-Expose-Headers', 'Authorization');
+    // Set the allowed origin
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  
+    // Set other CORS headers
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+  
     next();
   });
 app.use(cors());
