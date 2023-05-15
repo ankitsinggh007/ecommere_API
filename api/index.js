@@ -9,6 +9,11 @@ const errorMidlleware=require('./middleware/error');
 const mainRoute=require('./routes');
 
 const app=express();
+app.use((req, res, next) => {
+    // Set the Access-Control-Expose-Headers header to expose the Authorization header
+    res.setHeader('Access-Control-Expose-Headers', 'Authorization');
+    next();
+  });
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
