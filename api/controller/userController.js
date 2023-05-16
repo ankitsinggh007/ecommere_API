@@ -32,6 +32,8 @@ const Login = async (req, res, next) => {
         Date.now() + process.env.Expire_Cokies * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
+      sameSite: 'none',
+       secure: true
     };
     return res.status(200).cookie("token", token, option).json({
       success: true,
