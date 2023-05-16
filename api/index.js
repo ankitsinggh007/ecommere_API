@@ -10,11 +10,12 @@ const mainRoute=require('./routes');
 
 const app=express();
 
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+const corsConfig = {
+    origin: ' http://localhost:5173',
+    credentials: true,
+  };
+  
+  app.use(cors(corsConfig));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));

@@ -128,7 +128,9 @@ const getUserDeatils = async (req, res, next) => {
   }
 };
 const updateUserDetails = async (req, res, next) => {
+
   try {
+    
     const { name, email } = req.body;
     if (!(name && email)) {
       throw new Error("please provide name or email to update");

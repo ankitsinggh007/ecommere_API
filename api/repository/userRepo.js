@@ -28,7 +28,6 @@ class userRepo{
        }
        async UpdateUser(id,data){
         try {
-            console.log(id,data,"inside repo")
         const response=await User.findByIdAndUpdate(id,data,{new:true,runValidators:true});
             return response;
         } catch (error) {
