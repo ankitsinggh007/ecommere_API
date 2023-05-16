@@ -133,15 +133,15 @@ const updateUserDetails = async (req, res, next) => {
 
   try {
     
-    const { name, email } = req.body;
-    if (!(name && email)) {
+    if (!(req.body.name && req.body.email)) {
       throw new Error("please provide name or email to update");
     }
-    const response = await userservice.update(req.user._id, { name, email });
+    const response = await userservice.update(req.user._id, { ...req.body });
+    const {_id,name, email, phone, address} = response;
     return res.status(201).json({
       sucess: true,
       message: "sucessfully updated",
-      data: response,
+      data: {_id,name,email,phone,address},
       error: {},
     });
   } catch (error) {
