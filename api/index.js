@@ -7,7 +7,12 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const errorMidlleware=require('./middleware/error');
 const mainRoute=require('./routes');
-
+const cloudinary=require('cloudinary').v2;
+cloudinary.config({
+    cloud_name: "df9ovzwh6",
+    api_key: "959872715293163",
+    api_secret: "8Cu8RGZmUHp2xAmV0Xo4Wc28JNk"
+  });
 const app=express();
 
 const corsConfig = {
@@ -16,9 +21,9 @@ const corsConfig = {
   };
   
   app.use(cors(corsConfig));
-app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({extended:true}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 app.use('/api',mainRoute);
 
