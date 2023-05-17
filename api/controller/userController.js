@@ -2,11 +2,13 @@ const User = require("../models/User");
 const productService = require("../services/productService");
 const userService = require("../services/userService");
 const sendEmail = require("../utils/passwordRecover");
-
+const cloudinary=require('cloudinary');
 const userservice = new userService();
 
 const Register = async (req, res, next) => {
   try {
+   
+
     const response = await userservice.Create(req.body);
     return res.status(201).json({
       success: true,
@@ -131,17 +133,39 @@ const getUserDeatils = async (req, res, next) => {
 };
 const updateUserDetails = async (req, res, next) => {
 
+  
   try {
-    
-    if (!(req.body.name && req.body.email)) {
-      throw new Error("please provide name or email to update");
+    const newUserData={
+      ...req.body
     }
-    const response = await userservice.update(req.user._id, { ...req.body });
-    const {_id,name, email, phone, address} = response;
+    if (req.body.avatar !== "") {
+      const user = await User.findById(req.user.id);
+  
+      const imageId = user?.avatar?.public_id;
+      if(imageId) {
+  
+        await cloudinary.v2.uploader.destroy(imageId);
+      }
+  
+      const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      });
+      
+      newUserData.avatar = {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      };
+    }
+   
+    
+    const response = await userservice.update(req.user._id, { ...newUserData });
+    const {_id,name, email, phone,avatar ,address} = response;
     return res.status(201).json({
       sucess: true,
       message: "sucessfully updated",
-      data: {_id,name,email,phone,address},
+      data: {_id,name,email,phone,address,avatar},
       error: {},
     });
   } catch (error) {
@@ -173,14 +197,14 @@ const updateUserpassword = async (req, res, next) => {
     return res.status(201).json({
       sucess: true,
       message: "sucessfully updated",
-      data: response,
+      response: response,
       error: {},
     });
   } catch (error) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       message: `${error.message}`,
-      data: [],
+      response: [],
       error: error,
     });
   }
