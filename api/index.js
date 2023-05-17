@@ -21,6 +21,9 @@ const app=express();
 const corsConfig = {
     origin: ' http://localhost:5173',
     credentials: true,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "*",
+    "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
   };
   
   app.use(cors(corsConfig));
