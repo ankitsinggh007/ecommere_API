@@ -33,24 +33,6 @@ const userSchema=new mongoose.Schema({
           },
 
     },
-    phone:{
-        type:String,
-    },
-    address:String,
-    cart:[{
-        id:{
-            type:mongoose.Schema.ObjectId,
-            required:true,
-        },
-        name:{
-            type:String,
-            required:true,
-        },
-        image:String,
-        price:Number,
-        quantity:Number,
-
-    }],
     role:{
         type:String,
         default:'user',

@@ -28,8 +28,8 @@ class userRepo{
        }
        async UpdateUser(id,data){
         try {
-        const response=await User.findByIdAndUpdate(id,data,{new:true,runValidators:false});
-        return response;
+        const response=await User.findByIdAndUpdate(id,data,{new:true,runValidators:true});
+            return response;
         } catch (error) {
             throw error;
         }
