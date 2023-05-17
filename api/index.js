@@ -7,7 +7,6 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const errorMidlleware=require('./middleware/error');
 const mainRoute=require('./routes');
-
 const cloudinary=require('cloudinary').v2;
 cloudinary.config({
     cloud_name: "df9ovzwh6",
@@ -22,9 +21,10 @@ const corsConfig = {
   };
   
   app.use(cors(corsConfig));
+app.use(express.json());
 app.use(cookieParser());
 app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({extended,limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 
 app.use('/api',mainRoute);
