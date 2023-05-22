@@ -5,7 +5,7 @@ class ProductRepo {
 
    async Create(data){
     try {   
-        console.log(data,)
+        console.log(data)
         
     const response=await Product.create(data) ;
         return response;
@@ -40,12 +40,13 @@ class ProductRepo {
    async GetAll(query){
     try {
         console.log(query,"query");
-        const page=Math.abs(query.page)||1;
-        const noOfItems=5;
-        const skip=(page-1)*noOfItems;
-        const search="sam";
-        const response=await Product.find(
-            { name: { $regex: `${search}`, $options: 'i' } } ).skip(skip).limit(noOfItems);
+        // const page=Math.abs(query.page)||1;
+        // const noOfItems=5;
+        // const skip=(page-1)*noOfItems;
+        // const search="sam";
+        // const response=await Product.find(
+        //     { name: { $regex: `${search}`, $options: 'i' } } ).skip(skip).limit(noOfItems);
+        const response=await Product.find(query);
         return response;
     } catch (error) {
         throw error;

@@ -1,9 +1,24 @@
 const productService = require("../services/productService");
+const cloudinary=require('cloudinary');
 
 const productservice=new productService();
 
 const createItem=async (req, res, next)=>{
     try {
+        if(req.body.images.length>0){
+        for(let i=0;i<req.body.images.length;i++){
+            const myCloud = await cloudinary.v2.uploader.upload(req.body.images[i], {transformation: [
+                {width: 1000, crop: "scale"},
+                {quality: "auto"},
+                {fetch_format: "auto"}
+                ]});
+              
+              req.body.images[i] = {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url,
+              };
+        }
+        }
         const response=await productservice.listItem({...req.body,user:req.user._id});
 
         return res.status(201).json({

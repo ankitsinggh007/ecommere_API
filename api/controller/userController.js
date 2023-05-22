@@ -75,6 +75,13 @@ const LogOut = async (req, res, next) => {
     });
   }
 };
+
+const loadUser=async(req,res,next)=>{
+
+  console.log(req.user,"user");
+
+}
+
 const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -120,7 +127,7 @@ const getUserDeatils = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "sucessfully fetched user details",
-      data: response,
+      response: response,
     });
   } catch (error) {
     res.status(400).json({
@@ -294,5 +301,6 @@ module.exports = {
   deleteUserAdmin,
   updateUserByAdmin,
   getAllUser,
+  loadUser
   
 };
