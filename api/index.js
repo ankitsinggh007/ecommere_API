@@ -23,8 +23,8 @@ const corsConfig = {
     origin:'https://brilliant-truffle-1cecdc.netlify.app',
     credentials: true,
     // "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "*",
-    "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
+    // "Access-Control-Allow-Methods": "*",
+    // "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
   };
   
   app.use(cors(corsConfig));
