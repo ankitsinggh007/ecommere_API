@@ -19,8 +19,8 @@ const app=express();
 
 
 const corsConfig = {
-    origin: ' http://localhost:5173',
-    // origin:'https://brilliant-truffle-1cecdc.netlify.app',
+    // origin: ' http://localhost:5173',
+    origin:'https://brilliant-truffle-1cecdc.netlify.app',
     credentials: true,
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "*",
