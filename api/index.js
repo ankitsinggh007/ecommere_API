@@ -17,10 +17,15 @@ cloudinary.config({
 
 const app=express();
 
+let origin='https://brilliant-truffle-1cecdc.netlify.app';
+
+
+if(process.env.Development==='local'){
+    origin='http://localhost:5173';
+}
 
 const corsConfig = {
-    // origin: ' http://localhost:5173',
-    origin:'https://brilliant-truffle-1cecdc.netlify.app',
+    origin: origin,
     credentials: true,
     // "Access-Control-Allow-Origin": "*",
     // "Access-Control-Allow-Methods": "*",
