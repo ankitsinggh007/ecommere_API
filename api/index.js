@@ -17,7 +17,7 @@ cloudinary.config({
 
 const app=express();
 
-let origin='https://ecommerce-frontend-zeta.vercel.app/';
+let origin='https://ecommerce-frontend-zeta.vercel.app';
 
 console.log(process.env.Development,"environment");
 if(process.env.Development==='local'){
