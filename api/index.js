@@ -17,21 +17,22 @@ cloudinary.config({
 
 const app=express();
 
-// let origin='https://brilliant-truffle-1cecdc.netlify.app';
-// console.log(process.env.Development,"environment");
-// if(process.env.Development==='local'){
-//     origin='http://localhost:5173';
-// }
+let origin='https://ecommerce-frontend-zeta.vercel.app/';
 
-// const corsConfig = {
-//     origin: origin,
-//     credentials: true,
-//     // "Access-Control-Allow-Origin": "*",
-//     // "Access-Control-Allow-Methods": "*",
-//     // "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
-//   };
+console.log(process.env.Development,"environment");
+if(process.env.Development==='local'){
+    origin='http://localhost:5173';
+}
+
+const corsConfig = {
+    origin: origin,
+    credentials: true,
+    // "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Methods": "*",
+    // "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
+  };
   
-  app.use(cors());
+  app.use(cors(corsConfig));
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(cookieParser());
