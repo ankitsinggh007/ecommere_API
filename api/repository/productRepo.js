@@ -40,13 +40,12 @@ class ProductRepo {
    async GetAll(query){
     try {
         console.log(query,"query");
-        // const page=Math.abs(query.page)||1;
-        // const noOfItems=5;
-        // const skip=(page-1)*noOfItems;
-        // const search="sam";
-        // const response=await Product.find(
-        //     { name: { $regex: `${search}`, $options: 'i' } } ).skip(skip).limit(noOfItems);
-        const response=await Product.find(query);
+        console.log(query)
+        const page=Math.abs(query.page)||1;
+        console.log(page,"page");
+        const noOfItems=8;
+        const skip=(page-1)*noOfItems;
+        const response=await Product.find({}).skip(skip).limit(noOfItems);
         return response;
     } catch (error) {
         throw error;

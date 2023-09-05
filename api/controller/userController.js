@@ -1,3 +1,4 @@
+const Product = require("../models/Product");
 const User = require("../models/User");
 const productService = require("../services/productService");
 const userService = require("../services/userService");
@@ -217,6 +218,43 @@ const updateUserpassword = async (req, res, next) => {
   }
 };
 
+const addItemToCart=async(req,res,next)=>{
+  try {
+
+  const productId=req.params.id;
+  const quantity=+req.query.quantity;
+    const { _id } = req.user;
+    const user=await User.findById(_id);
+        const cartItem={
+          id:productId,
+          quantity
+        }
+    const product=await Product.findById(productId);
+    product.Stock=product.Stock-quantity;
+    console.log(product.Stock,quantity);
+    product.save()
+      user.cart.push(cartItem);
+
+      user.save();
+
+      
+    
+    return res.status(201).json({
+      sucess: true,
+      message: "sucessfully added to cart",
+      error: {},
+    });
+  } catch (error) {
+    return res.status(400).json({
+      sucess: false,
+      message: `${error.message}`,
+      data: [],
+      error: error,
+    });
+  }
+  
+}
+
 // for admin
 
 const deleteUserAdmin = async (req, res, next) => {
@@ -290,6 +328,8 @@ const getAllUser = async (req, res, next) => {
 };
 
 
+
+
 module.exports = {
   LogOut,
   Login,
@@ -301,6 +341,7 @@ module.exports = {
   deleteUserAdmin,
   updateUserByAdmin,
   getAllUser,
-  loadUser
+  loadUser,
+  addItemToCart
   
 };

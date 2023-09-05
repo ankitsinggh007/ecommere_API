@@ -1,5 +1,5 @@
 const express=require('express');
-const { Register, Login, LogOut, forgotPassword, getUserDeatils,updateUserDetails,updateUserpassword, deleteUserAdmin, updateUserByAdmin, getAllUser, createProductReview, loadUser } = require('../../controller/userController');
+const { Register, Login, LogOut, forgotPassword, getUserDeatils,updateUserDetails,updateUserpassword, deleteUserAdmin, updateUserByAdmin, getAllUser, createProductReview, loadUser, addItemToCart } = require('../../controller/userController');
 const { isAuthenticated } = require('../../middleware/Authentication');
 const { isAutherized } = require('../../middleware/Authentication');
 
@@ -9,6 +9,7 @@ router.post('/register',Register);
 router.post('/login',Login);
 router.get('/logout',LogOut);
 router.get('/loaduser',isAuthenticated,loadUser)
+router.get('/addItems/:id',isAuthenticated,addItemToCart)
 router.post('/resetPassword',forgotPassword);
 router.get('/profile',isAuthenticated,getUserDeatils);
 router.put('/update_profile',isAuthenticated,updateUserDetails);

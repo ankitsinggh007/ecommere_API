@@ -38,19 +38,11 @@ const userSchema=new mongoose.Schema({
     },
     address:String,
     cart:[{
-        id:{
+        Pid:{
             type:mongoose.Schema.ObjectId,
             required:true,
-        },
-        name:{
-            type:String,
-            required:true,
-        },
-        image:String,
-        price:Number,
-        quantity:Number,
-
-    }],
+            ref:'Product'
+        },quantity:Number}],
     role:{
         type:String,
         default:'user',

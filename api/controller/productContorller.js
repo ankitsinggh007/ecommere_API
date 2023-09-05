@@ -100,7 +100,11 @@ const getItem=async (req, res, next)=>{
 }
 const getAllItem=async (req, res, next)=>{
     try {
+
         const response=await productservice.GetItems(req.query);
+       
+       
+       
         return res.status(201).json({
             success:true,
             message:"item's is succesfully fetched",
